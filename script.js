@@ -17,21 +17,16 @@ randomColorButton.addEventListener('click', () => {
         gradientMode = false;
         gradientButton.textContent = 'Gradient Mode: OFF';
 
-        gradientButton.style.backgroundColor = '#bdc3c7';
-        gradientButton.style.color = 'dimgray';
-        gradientButton.style.fontStyle = 'italic';
+        gradientButton.classList.add('inactive');
+        gradientButton.classList.remove('active');
 
-        randomColorButton.style.backgroundColor = '';
-        randomColorButton.style.color = '';
-        randomColorButton.style.fontStyle = '';
+        randomColorButton.classList.add('active');
+        randomColorButton.classList.remove('inactive');
+
     } else {
-        gradientButton.style.backgroundColor = '';
-        gradientButton.style.color = '';
-        gradientButton.style.fontStyle = '';
+        randomColorButton.classList.remove('active', 'inactive');
+        gradientButton.classList.remove('active', 'inactive');
 
-        randomColorButton.style.backgroundColor = '';
-        randomColorButton.style.color = '';
-        randomColorButton.style.fontStyle = '';
     }
 
     randomColorButton.textContent = `Random Color Mode: ${randomColorMode ? 'ON' : 'OFF'}`;
@@ -45,21 +40,16 @@ gradientButton.addEventListener('click', () => {
         randomColorMode = false;
         randomColorButton.textContent = 'Random Color Mode: OFF';
 
-        randomColorButton.style.backgroundColor = '#bdc3c7';
-        randomColorButton.style.color = 'dimgray';
-        randomColorButton.style.fontStyle = 'italic';
+        randomColorButton.classList.add('inactive');
+        randomColorButton.classList.remove('active');
 
-        gradientButton.style.backgroundColor = '';
-        gradientButton.style.color = '';
-        gradientButton.style.fontStyle = '';
+        gradientButton.classList.add('active');
+        gradientButton.classList.remove('inactive');
+
     } else {
-        randomColorButton.style.backgroundColor = '';
-        randomColorButton.style.color = '';
-        randomColorButton.style.fontStyle = '';
+        randomColorButton.classList.remove('active', 'inactive');
+        gradientButton.classList.remove('active', 'inactive');
 
-        gradientButton.style.backgroundColor = '';
-        gradientButton.style.color = '';
-        gradientButton.style.fontStyle = '';
     }
 
     gradientButton.textContent = `Gradient Mode: ${gradientMode ? 'ON' : 'OFF'}`;
@@ -113,20 +103,28 @@ function createGrid(size) {
 
         square.addEventListener('mouseover', function () {
             if (painting) {
-                if (gradientMode) {
-                    let currentOpacity = parseFloat(square.style.opacity) || 0;
-                    if (currentOpacity < 1) {
-                        currentOpacity += 0.1;
-                        square.style.backgroundColor = 'black';
-                        square.style.opacity = currentOpacity;
-                    }
-                } else if (randomColorMode) {
+                if (randomColorMode) {
                     const r = Math.floor(Math.random() * 256);
                     const g = Math.floor(Math.random() * 256);
                     const b = Math.floor(Math.random() * 256);
                     square.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                    square.style.opacity = '1';
+                
+                } else if (gradientMode) {
+                    if (square.dataset.gradientInitialized !== 'true') {
+                        square.style.backgroundColor = 'black';
+                        square.style.opacity = '0';
+                        square.dataset.gradientInitialized = 'true';
+                    }
+                    
+                    let currentOpacity = parseFloat(square.style.opacity) || 0;
+                    if (currentOpacity < 1) {
+                        currentOpacity += 0.1;
+                        square.style.opacity = currentOpacity;
+                    }
                 } else {
                     square.style.backgroundColor = 'black';
+                    square.style.opacity = '1';
                 }    
             
             }

@@ -6,6 +6,47 @@
   padding: 0;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  button:active {
+    animation: flash 0.1s ease;
+  }
+  
+  @keyframes flash {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  /* ACTIVE button style (ON) */
+button.active {
+    background-color: teal;
+    color: white;
+    font-style: normal;
+  }
+  
+  /* INACTIVE style (OFF) */
+  button.inactive {
+    background-color: #bdc3c7;
+    color: dimgray;
+    font-style: italic;
+  }
+
 .grid-container {
     display: flex;
     justify-content: center;
@@ -15,6 +56,9 @@
     height: 512px;
     margin: 2rem auto;
     background-color: #fafafa;
+    border-radius: 10px;
+    background-color: #fafafa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .grid-square {
