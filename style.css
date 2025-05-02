@@ -1,0 +1,30 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.grid-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 512px;
+    height: 512px;
+    margin: 2rem auto;
+    background-color: #fafafa;
+}
+
+.grid-square {
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    background-color: #333;
+    transition: background-color 0.2s ease;
+}
+
+.grid-square:hover {
+    background-color: black;
+}
