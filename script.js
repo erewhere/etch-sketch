@@ -12,12 +12,58 @@ let painting = true;
 
 randomColorButton.addEventListener('click', () => {
     randomColorMode = !randomColorMode;
+
+    if (randomColorMode) {
+        gradientMode = false;
+        gradientButton.textContent = 'Gradient Mode: OFF';
+
+        gradientButton.style.backgroundColor = '#bdc3c7';
+        gradientButton.style.color = 'dimgray';
+        gradientButton.style.fontStyle = 'italic';
+
+        randomColorButton.style.backgroundColor = '';
+        randomColorButton.style.color = '';
+        randomColorButton.style.fontStyle = '';
+    } else {
+        gradientButton.style.backgroundColor = '';
+        gradientButton.style.color = '';
+        gradientButton.style.fontStyle = '';
+
+        randomColorButton.style.backgroundColor = '';
+        randomColorButton.style.color = '';
+        randomColorButton.style.fontStyle = '';
+    }
+
     randomColorButton.textContent = `Random Color Mode: ${randomColorMode ? 'ON' : 'OFF'}`;
+    randomColorButton.blur();
 });
 
 gradientButton.addEventListener('click', () => {
     gradientMode = !gradientMode;
+
+    if (gradientMode) {
+        randomColorMode = false;
+        randomColorButton.textContent = 'Random Color Mode: OFF';
+
+        randomColorButton.style.backgroundColor = '#bdc3c7';
+        randomColorButton.style.color = 'dimgray';
+        randomColorButton.style.fontStyle = 'italic';
+
+        gradientButton.style.backgroundColor = '';
+        gradientButton.style.color = '';
+        gradientButton.style.fontStyle = '';
+    } else {
+        randomColorButton.style.backgroundColor = '';
+        randomColorButton.style.color = '';
+        randomColorButton.style.fontStyle = '';
+
+        gradientButton.style.backgroundColor = '';
+        gradientButton.style.color = '';
+        gradientButton.style.fontStyle = '';
+    }
+
     gradientButton.textContent = `Gradient Mode: ${gradientMode ? 'ON' : 'OFF'}`;
+    gradientButton.blur();
 });
 
 resizeButton.addEventListener('click', () => {
@@ -36,13 +82,13 @@ resizeButton.addEventListener('click', () => {
 
     clearGrid();
     createGrid(newSize);
+    resizeButton.blur();
 });
 
 document.addEventListener('keydown', (e) => {
     if (e.code === 'Space') {
-        if (document.activeElement.tagName !== 'BUTTON') {
             painting = false;
-        }
+            e.preventDefault();
     }
 });
 
